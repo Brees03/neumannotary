@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Neumann Notary | Louisiana Mobile Notary</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;900&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy: #0d1b2a;
+      --gold: #c9a84c;
+      --gold-light: #e2c97e;
+      --cream: #f5efe6;
+      --warm-white: #fdfaf5;
+      --deep: #060e18;
+      --muted: #8a7f72;
+      --border: rgba(201,168,76,0.3);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy); color: var(--cream); font-family: 'Libre Baskerville', Georgia, serif; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.4; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(6,14,24,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-logo-wrap { display: flex; flex-direction: column; gap: 0.15rem; }
+    .nav-logo { font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 600; color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; }
+    .nav-tagline { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 0.62rem; color: var(--muted); letter-spacing: 0.04em; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: 'Libre Baskerville', serif; font-size: 0.78rem; color: var(--cream); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; transition: color 0.3s, opacity 0.3s; }
+    .nav-links a:hover { color: var(--gold); opacity: 1; }
+    .nav-cta { font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); background: var(--gold); padding: 0.55rem 1.4rem; text-decoration: none; transition: background 0.3s; }
+    .nav-cta:hover { background: var(--gold-light); }
+
+    #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 8rem 2rem 4rem; position: relative; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(201,168,76,0.07) 0%, transparent 70%), linear-gradient(180deg, var(--deep) 0%, var(--navy) 100%); }
+    .hero-seal { width: 90px; height: 90px; border: 2px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; position: relative; z-index: 1; animation: rotateSeal 30s linear infinite; }
+    @keyframes rotateSeal { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .hero-seal svg { animation: rotateSeal 30s linear infinite reverse; }
+    .hero-eyebrow { font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; position: relative; z-index: 1; animation: fadeUp 0.8s ease 0.2s both; }
+    .hero-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(3.5rem, 9vw, 7.5rem); font-weight: 900; line-height: 0.95; color: var(--warm-white); position: relative; z-index: 1; animation: fadeUp 0.8s ease 0.4s both; }
+    .hero-title em { font-style: italic; color: var(--gold); }
+    .hero-sub { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 1.05rem; color: var(--muted); margin-top: 1.5rem; max-width: 480px; line-height: 1.7; position: relative; z-index: 1; animation: fadeUp 0.8s ease 0.6s both; }
+    .hero-divider { width: 60px; height: 1px; background: var(--gold); margin: 2rem auto; position: relative; z-index: 1; animation: fadeUp 0.8s ease 0.7s both; }
+    .hero-actions { display: flex; gap: 1rem; align-items: center; position: relative; z-index: 1; animation: fadeUp 0.8s ease 0.8s both; }
+    .btn-primary { font-family: 'Cinzel', serif; font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--navy); background: var(--gold); padding: 1rem 2.2rem; text-decoration: none; transition: background 0.3s, transform 0.2s; display: inline-block; }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-ghost { font-family: 'Cinzel', serif; font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold); padding: 1rem 2.2rem; text-decoration: none; transition: background 0.3s, color 0.3s; display: inline-block; }
+    .btn-ghost:hover { background: rgba(201,168,76,0.1); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+    .marquee-strip { background: var(--gold); padding: 0.8rem 0; overflow: hidden; white-space: nowrap; }
+    .marquee-track { display: inline-block; animation: marquee 25s linear infinite; }
+    .marquee-track span { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--navy); margin: 0 2rem; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    section { position: relative; z-index: 1; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+    .section-label { font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; color: var(--warm-white); line-height: 1.15; }
+    .section-title em { font-style: italic; color: var(--gold); }
+
+    #services { padding: 7rem 2rem; background: var(--deep); }
+    .services-header { text-align: center; margin-bottom: 4rem; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: var(--border); }
+    .service-card { background: var(--navy); padding: 2.5rem 2rem; transition: background 0.3s; position: relative; overflow: hidden; }
+    .service-card::before { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-card:hover { background: rgba(201,168,76,0.05); }
+    .service-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .service-name { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--warm-white); margin-bottom: 0.6rem; }
+    .service-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+
+    #availability { padding: 5rem 2rem; background: var(--navy); }
+    .avail-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1100px; margin: 0 auto; }
+    .avail-badges { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 2rem; }
+    .badge { font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--border); padding: 0.5rem 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .avail-quote { border-left: 2px solid var(--gold); padding-left: 2rem; }
+    .avail-quote blockquote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.6rem; color: var(--warm-white); line-height: 1.5; }
+    .avail-quote cite { display: block; margin-top: 1rem; font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--gold); font-style: normal; }
+
+    #documents { padding: 7rem 2rem; background: var(--deep); }
+    .docs-header { text-align: center; margin-bottom: 4rem; }
+    .docs-header p { margin-top: 1rem; color: var(--muted); font-style: italic; font-size: 0.95rem; }
+    .docs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+    .doc-category { background: rgba(201,168,76,0.04); border: 1px solid var(--border); padding: 2rem; transition: border-color 0.3s; }
+    .doc-category:hover { border-color: var(--gold); }
+    .doc-cat-title { font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.6rem; }
+    .doc-list { list-style: none; }
+    .doc-list li { font-size: 0.85rem; color: var(--cream); padding: 0.4rem 0; padding-left: 1rem; position: relative; line-height: 1.4; opacity: 0.85; }
+    .doc-list li::before { content: '—'; position: absolute; left: 0; color: var(--gold); font-size: 0.7rem; }
+
+    #contact { padding: 7rem 2rem; background: var(--navy); }
+    .contact-top { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: start; max-width: 1100px; margin: 0 auto; }
+    .contact-intro { color: var(--muted); font-style: italic; margin: 1rem 0 2.5rem; line-height: 1.7; font-size: 0.95rem; }
+    .info-items { display: flex; flex-direction: column; gap: 1.4rem; }
+    .info-item { display: flex; align-items: flex-start; gap: 1rem; }
+    .info-icon { font-size: 1.1rem; margin-top: 0.1rem; }
+    .info-label { font-family: 'Cinzel', serif; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.25rem; }
+    .info-value { font-family: 'Libre Baskerville', serif; font-size: 0.88rem; color: var(--cream); text-decoration: none; }
+    a.info-value:hover { color: var(--gold); }
+
+    .form-wrap { background: var(--deep); border: 1px solid var(--border); padding: 2.5rem; }
+    .form-header { margin-bottom: 2rem; }
+    .form-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--warm-white); }
+    .form-sub { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 0.8rem; color: var(--muted); margin-top: 0.3rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; margin-bottom: 1.1rem; }
+    .form-group label { font-family: 'Cinzel', serif; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+    .form-group input, .form-group select, .form-group textarea { background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--cream); font-family: 'Libre Baskerville', serif; font-size: 0.85rem; padding: 0.7rem 0.9rem; outline: none; transition: border-color 0.3s; width: 100%; }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: var(--muted); font-style: italic; }
+    .form-group select { cursor: pointer; }
+    .form-group select option { background: var(--deep); color: var(--cream); }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
+    .form-group textarea { resize: vertical; }
+    .btn-submit { font-family: 'Cinzel', serif; font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--navy); background: var(--gold); border: none; padding: 1rem 2rem; width: 100%; cursor: pointer; transition: background 0.3s, transform 0.2s; margin-top: 0.5rem; }
+    .btn-submit:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .success-msg { font-family: 'Cinzel', serif; font-size: 0.78rem; letter-spacing: 0.1em; color: var(--gold); text-align: center; margin-top: 1.2rem; padding: 1rem; border: 1px solid var(--border); }
+
+    footer { background: var(--deep); border-top: 1px solid var(--border); padding: 2rem; text-align: center; }
+    footer p { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; }
+    footer strong { color: var(--gold); font-weight: 600; }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .services-grid { grid-template-columns: 1fr; }
+      .avail-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .docs-grid { grid-template-columns: 1fr; }
+      .contact-top { grid-template-columns: 1fr; gap: 2.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo-wrap">
+    <div class="nav-logo">Neumann Notary</div>
+    <div class="nav-tagline">Creating value with a signature</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#documents">Documents</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Schedule Now</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-seal">
+    <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="25" cy="25" r="22" stroke="#c9a84c" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <text x="25" y="29" text-anchor="middle" font-family="Cinzel" font-size="7" fill="#c9a84c" letter-spacing="1">NN</text>
+    </svg>
+  </div>
+  <p class="hero-eyebrow">Louisiana Commissioned Notary Public</p>
+  <h1 class="hero-title">Neumann<br/><em>Notary</em></h1>
+  <div class="hero-divider"></div>
+  <p class="hero-sub">Professional mobile notary services brought directly to you — wherever and whenever you need them.</p>
+  <div class="hero-actions" style="margin-top:2rem;">
+    <a href="#contact" class="btn-primary">Schedule an Appointment</a>
+    <a href="#documents" class="btn-ghost">What We Notarize</a>
+  </div>
+</section>
+
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span>Mobile Notary</span><span>✦</span><span>After Hours Available</span><span>✦</span>
+    <span>Weekends &amp; Holidays</span><span>✦</span><span>Flexible Scheduling</span><span>✦</span>
+    <span>Louisiana Licensed</span><span>✦</span><span>We Come To You</span><span>✦</span>
+    <span>Mobile Notary</span><span>✦</span><span>After Hours Available</span><span>✦</span>
+    <span>Weekends &amp; Holidays</span><span>✦</span><span>Flexible Scheduling</span><span>✦</span>
+    <span>Louisiana Licensed</span><span>✦</span><span>We Come To You</span><span>✦</span>
+  </div>
+</div>
+
+<section id="services">
+  <div class="services-header container">
+    <p class="section-label">What We Offer</p>
+    <h2 class="section-title">Services Built Around<br/><em>Your Schedule</em></h2>
+  </div>
+  <div class="container">
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🚗</div>
+        <div class="service-name">Mobile Notary</div>
+        <p class="service-desc">We come to your home, office, hospital, or any location of your choosing. No need to travel — we bring the notary stamp to you.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🌙</div>
+        <div class="service-name">After Hours Availability</div>
+        <p class="service-desc">Urgent signings don't wait for business hours. We're available evenings and late nights when most notaries are closed.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📅</div>
+        <div class="service-name">Weekends &amp; Holidays</div>
+        <p class="service-desc">Saturday, Sunday, or even major holidays — we work when you need us to. Life doesn't stop, and neither do we.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="availability">
+  <div class="avail-inner">
+    <div>
+      <p class="section-label">Always Available</p>
+      <h2 class="section-title">Flexible <em>Around</em><br/>Your Life</h2>
+      <div class="avail-badges">
+        <div class="badge"><span class="dot"></span> Evenings</div>
+        <div class="badge"><span class="dot"></span> Weekends</div>
+        <div class="badge"><span class="dot"></span> Holidays</div>
+        <div class="badge"><span class="dot"></span> Same-Day</div>
+        <div class="badge"><span class="dot"></span> Mobile</div>
+        <div class="badge"><span class="dot"></span> Flexible</div>
+      </div>
+    </div>
+    <div class="avail-quote">
+      <blockquote>"We understand that important documents can't always wait — so we make ourselves available when it matters most."</blockquote>
+      <cite>— Neumann Notary, Louisiana</cite>
+    </div>
+  </div>
+</section>
+
+<section id="documents">
+  <div class="docs-header container">
+    <p class="section-label">Louisiana Notarizations</p>
+    <h2 class="section-title">Everything We Can<br/><em>Notarize</em></h2>
+    <p>As a commissioned Louisiana Notary Public, we are authorized to notarize a broad range of documents.</p>
+  </div>
+  <div class="container">
+    <div class="docs-grid">
+      <div class="doc-category">
+        <div class="doc-cat-title">⚖️ Legal &amp; Court Documents</div>
+        <ul class="doc-list">
+          <li>Affidavits</li><li>Sworn Statements</li><li>Depositions &amp; Interrogatories</li>
+          <li>Powers of Attorney (General &amp; Limited)</li><li>Durable Power of Attorney</li>
+          <li>Court Petitions</li><li>Legal Complaints</li><li>Settlement Agreements</li>
+          <li>Consent Forms</li><li>Subpoenas (civil)</li>
+        </ul>
+      </div>
+      <div class="doc-category">
+        <div class="doc-cat-title">🏠 Real Estate Documents</div>
+        <ul class="doc-list">
+          <li>Acts of Sale (Cash &amp; Conventional)</li><li>Mortgage Documents</li>
+          <li>Promissory Notes</li><li>Deeds (Warranty, Quit Claim, Donation)</li>
+          <li>Lease Agreements</li><li>Cancellation of Mortgages</li>
+          <li>Vendor's Lien Notes</li><li>Acts of Correction</li>
+          <li>Right of Way Agreements</li><li>Cash Sale Acts</li>
+        </ul>
+      </div>
+      <div class="doc-category">
+        <div class="doc-cat-title">📋 Estate &amp; End-of-Life</div>
+        <ul class="doc-list">
+          <li>Last Will &amp; Testament (Notarial)</li><li>Olographic Will Certifications</li>
+          <li>Living Wills / Advance Directives</li><li>Healthcare Proxy</li>
+          <li>Succession Documents</li><li>Affidavit of Heirship</li>
+          <li>Intestate Succession Affidavit</li><li>Trust Documents</li><li>Letters Testamentary</li>
+        </ul>
+      </div>
+      <div class="doc-category">
+        <div class="doc-cat-title">💼 Business &amp; Commercial</div>
+        <ul class="doc-list">
+          <li>Articles of Incorporation</li><li>LLC Operating Agreements</li>
+          <li>Partnership Agreements</li><li>Business Sale Documents</li>
+          <li>Corporate Resolutions</li><li>Contracts &amp; Agreements</li>
+          <li>Commercial Leases</li><li>Bill of Sale</li>
+          <li>Franchise Agreements</li><li>Non-Disclosure Agreements</li>
+        </ul>
+      </div>
+      <div class="doc-category">
+        <div class="doc-cat-title">👨‍👩‍👧 Family &amp; Personal</div>
+        <ul class="doc-list">
+          <li>Marriage Contracts &amp; Prenuptial Agreements</li>
+          <li>Acknowledgment of Paternity</li><li>Adoption Documents</li>
+          <li>Child Custody Agreements</li><li>Minor Travel Consent Letters</li>
+          <li>Name Change Affidavits</li><li>Child Support Agreements</li>
+          <li>Separation Agreements</li><li>Guardianship Documents</li>
+        </ul>
+      </div>
+      <div class="doc-category">
+        <div class="doc-cat-title">🚢 Maritime &amp; Louisiana-Specific</div>
+        <ul class="doc-list">
+          <li>Ship's Protest</li><li>Maritime Affidavits</li><li>Vessel Bills of Sale</li>
+          <li>Oil &amp; Gas Lease Documents</li><li>Mineral Rights Transfers</li>
+          <li>Surface Use Agreements</li><li>Royalty Assignments</li>
+          <li>Pipeline Right-of-Way</li><li>Acts of Donation (Movable/Immovable)</li>
+        </ul>
+      </div>
+      <div class="doc-category">
+        <div class="doc-cat-title">🏦 Financial &amp; Banking</div>
+        <ul class="doc-list">
+          <li>Loan Documents</li><li>Bank Signature Cards</li>
+          <li>Certified Financial Statements</li><li>IRA &amp; Retirement Account Forms</li>
+          <li>Stock &amp; Bond Transfers</li><li>Insurance Documents &amp; Claims</li>
+          <li>Surety Bonds</li><li>Refinancing Documents</li><li>Debt Settlement Agreements</li>
+        </ul>
+      </div>
+      <div class="doc-category">
+        <div class="doc-cat-title">🌐 International &amp; Government</div>
+        <ul class="doc-list">
+          <li>Apostille-Ready Documents</li><li>Foreign Document Affidavits</li>
+          <li>Vital Records Certifications</li><li>Immigration Affidavits of Support</li>
+          <li>Translation Certifications</li><li>Passport Application Support Docs</li>
+          <li>Government Contract Documents</li><li>Residency Affidavits</li>
+        </ul>
+      </div>
+      <div class="doc-category">
+        <div class="doc-cat-title">🚗 Vehicles &amp; Property</div>
+        <ul class="doc-list">
+          <li>Vehicle Bill of Sale</li><li>Title Transfer Documents</li>
+          <li>Boat &amp; Watercraft Titles</li><li>Manufactured Home Documents</li>
+          <li>Storage Unit Liens</li><li>Personal Property Agreements</li>
+          <li>Equipment Lease &amp; Sale</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-top">
+      <div class="contact-info">
+        <p class="section-label">Get In Touch</p>
+        <h2 class="section-title">Ready to <em>Schedule?</em></h2>
+        <p class="contact-intro">We're available after hours, on weekends, and holidays. Fill out the form and we'll reach out to confirm your appointment.</p>
+        <div class="info-items">
+          <div class="info-item">
+            <span class="info-icon">📞</span>
+            <div>
+              <div class="info-label">Phone / Text</div>
+              <a href="tel:+15049097380" class="info-value">(504) 909-7380</a>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="info-icon">✉️</span>
+            <div>
+              <div class="info-label">Email</div>
+              <a href="mailto:neumann.notary@gmail.com" class="info-value">neumann.notary@gmail.com</a>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="info-icon">📍</span>
+            <div>
+              <div class="info-label">Area Served</div>
+              <div class="info-value">Louisiana · Tangipahoa Parish</div>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="info-icon">🕐</span>
+            <div>
+              <div class="info-label">Availability</div>
+              <div class="info-value">After Hours · Weekends · Holidays</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-wrap">
+        <div class="form-header">
+          <p class="form-title">Book an Appointment</p>
+          <p class="form-sub">We'll confirm within a few hours</p>
+        </div>
+        <form id="booking-form" action="https://formspree.io/f/xpqbnaqr" method="POST">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" placeholder="Jane Doe" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="(504) 000-0000" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required />
+          </div>
+          <div class="form-group">
+            <label for="document">Document Type Needed</label>
+            <select id="document" name="document_type" required>
+              <option value="" disabled selected>Select a document type...</option>
+              <option>Affidavit / Sworn Statement</option>
+              <option>Power of Attorney</option>
+              <option>Real Estate / Act of Sale</option>
+              <option>Will / Estate Document</option>
+              <option>Business Document</option>
+              <option>Family / Personal Document</option>
+              <option>Loan / Financial Document</option>
+              <option>Vehicle / Property Transfer</option>
+              <option>Oil, Gas &amp; Mineral Document</option>
+              <option>Immigration / International Document</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="date">Preferred Date</label>
+              <input type="date" id="date" name="preferred_date" required />
+            </div>
+            <div class="form-group">
+              <label for="time">Preferred Time</label>
+              <select id="time" name="preferred_time" required>
+                <option value="" disabled selected>Select a time...</option>
+                <option>Morning (8am – 12pm)</option>
+                <option>Afternoon (12pm – 5pm)</option>
+                <option>Evening (5pm – 9pm)</option>
+                <option>Late Night (9pm+)</option>
+                <option>Weekend – Any Time</option>
+                <option>Holiday – Any Time</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="location">Meeting Location / Address</label>
+            <input type="text" id="location" name="meeting_location" placeholder="Your home, office, hospital, etc." required />
+          </div>
+          <div class="form-group">
+            <label for="message">Additional Notes (optional)</label>
+            <textarea id="message" name="message" rows="3" placeholder="Any details we should know..."></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Send Appointment Request</button>
+          <div id="form-success" style="display:none;">
+            <p class="success-msg">✦ Thank you! We'll be in touch shortly to confirm your appointment.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 <strong>Neumann Notary</strong> &nbsp;·&nbsp; Louisiana Commissioned Notary Public &nbsp;·&nbsp; All Rights Reserved</p>
+</footer>
+
+<script>
+  const form = document.getElementById('booking-form');
+  const successMsg = document.getElementById('form-success');
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const data = new FormData(form);
+    const btn = form.querySelector('.btn-submit');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+      if (res.ok) {
+        form.reset();
+        successMsg.style.display = 'block';
+        btn.textContent = 'Request Sent ✦';
+      } else {
+        btn.textContent = 'Error — Please Try Again';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = 'Error — Please Try Again';
+      btn.disabled = false;
+    }
+  });
+</script>
+
+</body>
+</html>
